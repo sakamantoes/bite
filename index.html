@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f2b33d">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23f2b33d'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle'%3E%F0%9F%8D%B4%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2b33d'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle'%3E%F0%9F%8D%B4%3C/text%3E%3C/svg%3E">
 <title>Bites – We Serve The Taste You Love</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -182,6 +185,60 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
  section{padding:70px 0}.dish{flex-basis:250px}.rev{flex-basis:290px}
 }
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+
+/* ===== responsive pass ===== */
+html{overflow-x:clip;-webkit-text-size-adjust:100%}
+.hero{min-height:100vh;min-height:100svh}
+@media(max-width:1100px){
+ .links{gap:22px}.chips{right:0}.chip{padding:6px 14px 6px 6px;font-size:12px}.chip img{width:26px;height:26px}
+ .reserve,.app{padding:48px 36px}
+}
+@media(max-width:900px){
+ .wrap{padding:0 18px}
+ header{padding:10px 0}
+ .links{position:absolute;inset:auto;left:0;right:0;top:100%;z-index:auto;padding:14px 22px 24px;gap:4px;font-size:17px;border-radius:0 0 28px 28px;transform:translateY(-14px);opacity:0;visibility:hidden;transition:.35s;background:var(--cream)}
+ .links.open{transform:none;opacity:1;visibility:visible}
+ .links a{padding:12px 0;border-bottom:1px solid var(--sand)}.links a::after{display:none}
+ .hero{min-height:auto;padding:100px 0 50px}
+ .hero .wrap{gap:18px}.hero h1{font-size:clamp(36px,10.5vw,60px)}
+ .hero p{margin:18px auto 26px;font-size:14.5px}
+ .stage{max-width:360px}.plate{border-width:7px}
+ .leaf{font-size:38px}.rate{padding:8px 12px;font-size:11px;bottom:4%}.rate b{font-size:18px}
+ .chips{gap:8px;margin-top:26px;position:static;transform:none}
+ .tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding:4px 18px 12px;margin:0 -18px 26px;scrollbar-width:none}
+ .tabs::-webkit-scrollbar{display:none}.tab{flex:none}
+ .head{margin-bottom:26px}.head h2{flex:1 1 200px}
+ .rail{margin:0 -18px;padding:10px 18px 34px;scroll-padding:0 18px}
+ .about .wrap{gap:44px}.chefwrap{max-width:340px}
+ .reserve .bowl,.app .phone{margin-top:6px}
+ .marq{font-size:15px;padding:12px 0}
+ footer .wrap{flex-direction:column;text-align:center}
+}
+@media(max-width:600px){
+ section{padding:56px 0}
+ .btn{padding:13px 22px;font-size:14px}
+ .cart,.burger{width:42px;height:42px}
+ .logo{font-size:20px}.logo i{width:34px;height:34px}
+ .dish{flex-basis:76vw;max-width:300px;padding:18px}
+ .rev{flex-basis:82vw;max-width:340px;padding:22px}
+ .rev q{min-height:0}
+ .grid{grid-template-columns:repeat(2,1fr);gap:14px}
+ .grid .dish{padding:14px}.grid .dish .pic{width:100px;height:100px}.grid .dish h3{font-size:15px}.grid .dish p{display:none}
+ .grid .buy{flex-direction:column;gap:8px;align-items:center}.grid .buy b{font-size:17px}
+ .feats{grid-template-columns:1fr}.nums{gap:22px;justify-content:space-between}.nums b{font-size:28px}
+ .chefs{grid-template-columns:repeat(2,1fr);gap:14px}.chef h4{font-size:14px}
+ .reserve,.app{padding:30px 20px;border-radius:26px}
+ .phone{width:170px}
+ .box{padding:30px 22px;border-radius:26px;max-height:92svh;overflow:auto}.box h3{font-size:22px}
+ .modal{padding:14px}
+ #heart{width:54px;height:54px;font-size:24px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom))}
+ .toast{width:calc(100% - 32px);text-align:center;bottom:calc(20px + env(safe-area-inset-bottom))}
+ footer{padding-bottom:90px}
+}
+@media(max-width:380px){
+ .grid{grid-template-columns:1fr}.grid .dish p{display:block}
+ .hero h1{font-size:34px}.chip{font-size:11px}
+}
 </style>
 </head>
 <body>
@@ -330,7 +387,9 @@ $$('.arrows button').forEach(b=>b.onclick=()=>{$('#'+b.dataset.r).scrollBy({left
 
 // nav
 const hd=$('#hd');addEventListener('scroll',()=>hd.classList.toggle('stuck',scrollY>30),{passive:true});
-$('#bg').onclick=()=>$('#links').classList.toggle('open');$$('#links a').forEach(a=>a.onclick=()=>$('#links').classList.remove('open'));
+$('#bg').onclick=()=>{const o=$('#links').classList.toggle('open');$('#bg').textContent=o?'✕':'☰';$('#bg').setAttribute('aria-expanded',o)};
+$$('#links a').forEach(a=>a.addEventListener('click',()=>{$('#bg').textContent='☰'}));
+$$('#links a').forEach(a=>a.onclick=()=>$('#links').classList.remove('open'));
 
 // reveal + counters
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(c=>{const t=+c.dataset.n;let v=0;const s=setInterval(()=>{v+=Math.ceil(t/40);if(v>=t){v=t;clearInterval(s)}c.textContent=v},35)});io.unobserve(e.target)}}),{threshold:.15});
